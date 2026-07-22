@@ -476,61 +476,6 @@
                     Click="Enviar_Click"/>
         </Grid>
 
-        <!-- ── Barra do Modo Áudio: indicador de idioma detectado + microfone + status
-             (some fora do Modo Áudio; fica em cima da lista de mensagens, com a caixa de
-             texto normal disponível embaixo — dá pra falar OU digitar) ── -->
-        <Grid Grid.Row="2" x:Name="inputAudio" Visibility="Collapsed" Margin="0,0,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- Idioma que o microfone está entendendo agora — só leitura: a troca entre
-                 português e inglês é automática (ver TrocarIdiomaAutomaticamente no code-behind),
-                 a pessoa não precisa mais escolher antes de falar. -->
-            <Border Grid.Column="0" Background="{DynamicResource CorFundoIcone}" CornerRadius="12"
-                    Padding="12,0" Height="38" ToolTip="Idioma detectado agora (troca sozinho)">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" FontSize="13"
-                               Foreground="{DynamicResource CorTextoSuave}" Margin="0,0,6,0"/>
-                    <TextBlock x:Name="lblIdiomaAtual" Text="EN" FontWeight="Bold" FontSize="13"
-                               Foreground="{DynamicResource CorTextoSuave}"/>
-                </StackPanel>
-            </Border>
-
-            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="14,0">
-                <TextBlock x:Name="lblStatusAudio" Text="Toque no microfone e fale"
-                           Foreground="{DynamicResource CorTextoMuted}" FontSize="13"/>
-            </StackPanel>
-
-            <!-- Botão de microfone: toque pra começar a ouvir, toque de novo pra parar -->
-            <Button x:Name="btnMicrofone" Grid.Column="2"
-                    Width="56" Height="56" Cursor="Hand"
-                    Background="{DynamicResource CorAcento}"
-                    Click="Microfone_Click"
-                    ToolTip="Falar com a Ana">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="bdMic" CornerRadius="28"
-                                Background="{TemplateBinding Background}">
-                            <Viewbox Width="22" Height="22">
-                                <Canvas Width="24" Height="24">
-                                    <Path x:Name="iconeMic" Fill="White"
-                                          Data="M12 15a3 3 0 003-3V6a3 3 0 10-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.93V21h2v-2.07A7 7 0 0019 12h-2z"/>
-                                </Canvas>
-                            </Viewbox>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="bdMic" Property="Opacity" Value="0.85"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </Grid>
-
         <!-- ── Diálogo de confirmação "Limpar conversa" (some por padrão) ── -->
         <Grid x:Name="overlayConfirmarLimpar" Grid.Row="0" Grid.RowSpan="5"
               Background="#99000000" Visibility="Collapsed">
