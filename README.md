@@ -51,9 +51,11 @@ Cada pessoa usa a própria chave, gerada por ela mesma.
 
 ## 🖥️ Tecnologias
 
-C# / WPF · .NET 8 · Python + edge-tts · Gemini API
-
----
+- **C# / WPF** — interface e lógica do app
+- **.NET 8**
+- **SQLite** (`Microsoft.Data.Sqlite`) — banco de dados local (`dicionario.db`)
+- **Python + edge-tts** — geração de voz para pronúncia
+- **Gemini API** — assistente com IA (Ana)
 
 ## 👨‍💻 Autor
 
