@@ -1,0 +1,568 @@
+<UserControl x:Class="WordByWord.AssistentePainel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WordByWord">
+    <UserControl.Resources>
+
+
+        <!-- ── Botão azul (Enviar / Salvar chave) ── -->
+        <Style x:Key="BtnAzul" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource CorAcento}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}"
+                                CornerRadius="14" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#3644C7"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#3644C7"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Background" Value="#134e4a"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Botão de ícone (mic / config / limpar) ── -->
+        <Style x:Key="BtnIcone" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource CorFundoIcone}"/>
+            <Setter Property="Foreground" Value="{DynamicResource CorTextoSuave}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="12">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource CorFundoIconeHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Botão vermelho (ações destrutivas, ex.: confirmar "Apagar tudo") ── -->
+        <Style x:Key="BtnVermelho" TargetType="Button">
+            <Setter Property="Background" Value="#ef4444"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}"
+                                CornerRadius="12" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#dc2626"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#b91c1c"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Botão "fantasma" (cancelar em diálogos) ── -->
+        <Style x:Key="BtnFantasma" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource CorFundoIcone}"/>
+            <Setter Property="Foreground" Value="{DynamicResource CorTextoSuave}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}"
+                                CornerRadius="12" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{DynamicResource CorFundoIconeHover}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Botão Voltar (link-style, igual ao usado no painel de detalhe) ── -->
+        <Style x:Key="BtnVoltar" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource CorTextoMuted}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock x:Name="tb" Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontSize="{TemplateBinding FontSize}"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="tb" Property="Foreground" Value="{DynamicResource CorTextoPrimario}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ── Balão de mensagem do chat (só texto) ── -->
+        <DataTemplate x:Key="ModeloBalaoSemOuvir">
+            <Grid Margin="0,0,0,10">
+                <Border Background="{DynamicResource CorAcento}" CornerRadius="16,16,4,16"
+                        Padding="12,9" MaxWidth="440" HorizontalAlignment="Right">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EhUsuario}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Texto}" Foreground="White" FontSize="14" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Traducao}" Foreground="#DCE1FF" FontSize="14" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ModoConversacao}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <TextBlock Text="Traduzindo..." FontSize="11" Foreground="#B9C1FF">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Traduzindo}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <Button Content="Traduzir" Click="TraduzirMensagem_Click" Cursor="Hand" Padding="0"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="#B9C1FF" FontSize="11" FontWeight="SemiBold">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                                <Setter Property="Content" Value="Ver original"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Traduzindo}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource CorFundoIcone}" CornerRadius="16,16,16,4"
+                        Padding="12,9" MaxWidth="440" HorizontalAlignment="Left">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EhUsuario}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel>
+                        <TextBlock local:FormatadorTexto.Texto="{Binding Texto}"
+                                   Foreground="{DynamicResource CorTextoSuave}"
+                                   FontSize="14" TextWrapping="Wrap" LineHeight="20">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Traducao}"
+                                   Foreground="{DynamicResource CorTextoSuave}"
+                                   FontSize="14" TextWrapping="Wrap" LineHeight="20">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding ModoConversacao}" Value="True"/>
+                                                <Condition Binding="{Binding Carregando}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <TextBlock Text="Traduzindo..." FontSize="11" Foreground="{DynamicResource CorTextoMuted}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Traduzindo}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <Button Click="TraduzirMensagem_Click" Cursor="Hand" Padding="0"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="{DynamicResource CorAcento}" FontSize="11" FontWeight="SemiBold">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Content" Value="Traduzir"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding TemTraducao}" Value="True">
+                                                <Setter Property="Content" Value="Ver original"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Traduzindo}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── Cabeçalho ── -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Height="40" Padding="14,0" CornerRadius="14"
+                    Background="{DynamicResource CorFundoIcone}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                    <!-- Ícone de estrela/sparkle (modo "tirar dúvidas") -->
+                    <Viewbox x:Name="iconeCabecalhoDuvidas" Width="16" Height="16" Margin="0,0,8,0">
+                        <Canvas Width="24" Height="24">
+                            <Path Fill="{DynamicResource CorAcento}" Data="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.5 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.949.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.949l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.949-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.949l.395-1.183A.75.75 0 0116.5 15z"/>
+                        </Canvas>
+                    </Viewbox>
+
+                    <!-- Ícone de balão de chat (modo "bate-papo") -->
+                    <Viewbox x:Name="iconeCabecalhoConversa" Width="16" Height="16" Margin="0,0,8,0" Visibility="Collapsed">
+                        <Canvas Width="24" Height="24">
+                            <Path Stroke="{DynamicResource CorAcento}" StrokeThickness="2" StrokeLineJoin="Round"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Data="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </Canvas>
+                    </Viewbox>
+
+                    <TextBlock x:Name="lblTituloModo" Text="Assistente"
+                               Foreground="{DynamicResource CorTextoPrimario}"
+                               FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Column="1" Margin="14,0,8,0" VerticalAlignment="Center">
+                <TextBlock x:Name="lblStatus" Text="Tire dúvidas por texto"
+                           Foreground="{DynamicResource CorTextoMuted}" FontSize="13"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button x:Name="btnLimpar" Content="&#xE74D;" FontFamily="Segoe MDL2 Assets"
+                        Style="{StaticResource BtnIcone}"
+                        ToolTip="Apagar conversa desta aba"
+                        Foreground="#f87171"
+                        Margin="0,0,8,0"
+                        Click="Limpar_Click"/>
+                <Button Content="⚙" Style="{StaticResource BtnIcone}"
+                        ToolTip="Configurar chave de API e voz"
+                        Click="Config_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ── Botão voltar para a lista ── -->
+        <Button Grid.Row="1" Content="← Voltar para a lista"
+                Style="{StaticResource BtnVoltar}"
+                Click="Voltar_Click"
+                HorizontalAlignment="Left"
+                Margin="0,0,0,16"/>
+
+        <!-- ── Painel de configuração da chave de API e voz (some por padrão) ── -->
+        <Border x:Name="painelConfig" Grid.Row="1"
+                Background="{DynamicResource CorFundoCard}" CornerRadius="14" Padding="16"
+                Margin="0,40,0,16" Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock Text="CHAVE DE API DO ASSISTENTE" Foreground="{DynamicResource CorAcento}"
+                           FontSize="10" FontWeight="Bold" Margin="0,0,0,8"/>
+                <TextBlock Text="Cole abaixo a chave de API para ativar o assistente. Ela fica salva apenas neste computador."
+                           Foreground="{DynamicResource CorTextoMuted}" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                <TextBox x:Name="txtApiKey"
+                         Background="{DynamicResource CorFundoPainel}" Foreground="{DynamicResource CorTextoPrimario}" CaretBrush="{DynamicResource CorTextoPrimario}"
+                         BorderBrush="{DynamicResource CorBorda}" BorderThickness="1"
+                         Padding="10" Height="40" FontSize="13" Margin="0,0,0,14"/>
+
+                <StackPanel Margin="0,0,0,14">
+                    <TextBlock Text="MODELO" Foreground="{DynamicResource CorAcento}"
+                               FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                    <ComboBox x:Name="cmbModelo"
+                              Height="38" FontSize="13"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="gemini-2.0-flash"/>
+                        <ComboBoxItem Content="gemini-2.5-flash"/>
+                        <ComboBoxItem Content="gemini-flash-lite-latest"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,14">
+                    <TextBlock Text="VOZ PARA PRONÚNCIA DAS PALAVRAS" Foreground="{DynamicResource CorAcento}"
+                               FontSize="10" FontWeight="Bold" Margin="0,0,0,6"/>
+                    <ComboBox x:Name="cmbVoz"
+                              Height="38" FontSize="13"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="Ava (en-US) — feminina, multilíngue" Tag="en-US-AvaMultilingualNeural"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Obtenha uma chave gratuita em aistudio.google.com/apikey"
+                               Foreground="#64748b" FontSize="11" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <Button Grid.Column="2" Content="Salvar" Style="{StaticResource BtnAzul}"
+                            Width="90" Height="36" Click="SalvarChave_Click"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- ── Lista de mensagens do chat (só texto) ── -->
+        <Border Grid.Row="3" x:Name="cardChatTexto" Background="{DynamicResource CorFundoCard}" CornerRadius="20" Padding="16" Margin="0,0,0,16">
+            <ScrollViewer x:Name="scrollChatTexto"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="listaMensagensTexto" ItemTemplate="{StaticResource ModeloBalaoSemOuvir}"/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- ── Barra de entrada: caixa de texto + botão Enviar ── -->
+        <Grid Grid.Row="4" x:Name="inputTexto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="txtPergunta" Grid.Column="0"
+                     Background="{DynamicResource CorFundoCard}" Foreground="{DynamicResource CorTextoPrimario}" CaretBrush="{DynamicResource CorTextoPrimario}"
+                     BorderBrush="{DynamicResource CorBorda}" BorderThickness="1"
+                     Padding="10" Height="44" FontSize="14"
+                     VerticalContentAlignment="Center"
+                     TextWrapping="NoWrap" AcceptsReturn="False"
+                     KeyDown="TxtPergunta_KeyDown"/>
+
+            <Button x:Name="btnEnviar" Grid.Column="1"
+                    Content="Enviar" Style="{StaticResource BtnAzul}"
+                    Width="96" Margin="8,0,0,0"
+                    Click="Enviar_Click"/>
+        </Grid>
+
+        <!-- ── Barra do Modo Áudio: indicador de idioma detectado + microfone + status
+             (some fora do Modo Áudio; fica em cima da lista de mensagens, com a caixa de
+             texto normal disponível embaixo — dá pra falar OU digitar) ── -->
+        <Grid Grid.Row="2" x:Name="inputAudio" Visibility="Collapsed" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Idioma que o microfone está entendendo agora — só leitura: a troca entre
+                 português e inglês é automática (ver TrocarIdiomaAutomaticamente no code-behind),
+                 a pessoa não precisa mais escolher antes de falar. -->
+            <Border Grid.Column="0" Background="{DynamicResource CorFundoIcone}" CornerRadius="12"
+                    Padding="12,0" Height="38" ToolTip="Idioma detectado agora (troca sozinho)">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                               Foreground="{DynamicResource CorTextoSuave}" Margin="0,0,6,0"/>
+                    <TextBlock x:Name="lblIdiomaAtual" Text="EN" FontWeight="Bold" FontSize="13"
+                               Foreground="{DynamicResource CorTextoSuave}"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="14,0">
+                <TextBlock x:Name="lblStatusAudio" Text="Toque no microfone e fale"
+                           Foreground="{DynamicResource CorTextoMuted}" FontSize="13"/>
+            </StackPanel>
+
+            <!-- Botão de microfone: toque pra começar a ouvir, toque de novo pra parar -->
+            <Button x:Name="btnMicrofone" Grid.Column="2"
+                    Width="56" Height="56" Cursor="Hand"
+                    Background="{DynamicResource CorAcento}"
+                    Click="Microfone_Click"
+                    ToolTip="Falar com a Ana">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bdMic" CornerRadius="28"
+                                Background="{TemplateBinding Background}">
+                            <Viewbox Width="22" Height="22">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="iconeMic" Fill="White"
+                                          Data="M12 15a3 3 0 003-3V6a3 3 0 10-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.93V21h2v-2.07A7 7 0 0019 12h-2z"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bdMic" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <!-- ── Diálogo de confirmação "Limpar conversa" (some por padrão) ── -->
+        <Grid x:Name="overlayConfirmarLimpar" Grid.Row="0" Grid.RowSpan="5"
+              Background="#99000000" Visibility="Collapsed">
+            <Border Background="{DynamicResource CorFundoPainel}"
+                    BorderBrush="{DynamicResource CorBorda}" BorderThickness="1"
+                    CornerRadius="18" Padding="24" Width="320"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" Opacity="0.4" BlurRadius="24" ShadowDepth="6"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="28"
+                               Foreground="#f87171" Margin="0,0,0,14"/>
+                    <TextBlock Text="Limpar conversa" FontSize="17" FontWeight="Bold"
+                               Foreground="{DynamicResource CorTextoPrimario}" Margin="0,0,0,8"/>
+                    <TextBlock Text="Isso apaga todas as mensagens desta conversa. Essa ação não pode ser desfeita."
+                               Foreground="{DynamicResource CorTextoMuted}" FontSize="13"
+                               TextWrapping="Wrap" Margin="0,0,0,20"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Cancelar" Style="{StaticResource BtnFantasma}"
+                                Click="CancelarLimpar_Click"/>
+                        <Button Grid.Column="2" Content="Apagar tudo" Style="{StaticResource BtnVermelho}"
+                                Click="ConfirmarLimpar_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
+</UserControl>

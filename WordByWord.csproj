@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>WordByWord</AssemblyName>
+    <RootNamespace>WordByWord</RootNamespace>
+    <!-- Ícone embutido no .exe — aparece na barra de tarefas e atalhos fixados -->
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+
+  <!-- Reconhecimento de voz (microfone) do Modo Áudio. É a API de fala nativa do Windows
+       (offline, sem custo, sem chave) — por isso o Modo Áudio funciona só no Windows,
+       igual o resto do app. Precisa do idioma correspondente instalado no Windows
+       (Configurações → Hora e Idioma → Fala) pra reconhecer aquele idioma. -->
+  <ItemGroup>
+    <PackageReference Include="System.Speech" Version="8.0.0" />
+  </ItemGroup>
+
+  <!-- Banco de dados local (dicionario.db) usado pelo DicionarioServico para guardar -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
+  </ItemGroup>
+
+  <!-- Logos do app: só as que são realmente usadas na tela de carregamento -->
+  <ItemGroup>
+    <Resource Include="Assets\logo-clara.png" />
+    <Resource Include="Assets\logo-sequencia-1.png" />
+  </ItemGroup>
+</Project>

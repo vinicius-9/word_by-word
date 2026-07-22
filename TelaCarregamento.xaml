@@ -1,0 +1,97 @@
+<Window x:Class="WordByWord.TelaCarregamento"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Word By Word"
+        Icon="app.ico"
+        Height="660"
+        Width="1060"
+        MinHeight="560"
+        MinWidth="820"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        FontFamily="{StaticResource FontePadrao}"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Opacity="0"
+        ShowInTaskbar="True">
+
+    <Border Background="{DynamicResource CorFundoJanela}"
+            BorderBrush="{DynamicResource CorBorda}"
+            BorderThickness="1"
+            CornerRadius="28">
+        <Border.Effect>
+            <DropShadowEffect Color="Black"
+                    Opacity="0.45"
+                    BlurRadius="32"
+                    ShadowDepth="10"/>
+        </Border.Effect>
+
+        <Grid>
+            <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+                <!-- Logo do app: a animação inicia exibindo a imagem de abertura e faz uma
+                transição suave (crossfade) diretamente para a marca final do aplicativo.
+                As duas imagens ocupam exatamente o mesmo espaço para que a troca aconteça
+                de forma fluida, sem alteração de tamanho ou posição. -->
+                <Border x:Name="cardLogo"
+                        Width="320"
+                        Height="320"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,20"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <ScaleTransform x:Name="escalaLogo"
+                                ScaleX="1"
+                                ScaleY="1"/>
+                    </Border.RenderTransform>
+                    <Grid>
+                        <Image x:Name="imgSequencia1"
+                                Stretch="Uniform"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="pack://application:,,,/Assets/logo-sequencia-1.png"/>
+                        <Image x:Name="imgLogo"
+                                Stretch="Uniform"
+                                Opacity="0"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Grid>
+                </Border>
+
+                <!-- Indicador de carregamento: anel giratório -->
+                <Grid Width="34"
+                        Height="34"
+                        HorizontalAlignment="Center">
+                    <Ellipse Width="34"
+                            Height="34"
+                             Stroke="{DynamicResource CorFundoIcone}"
+                             StrokeThickness="3.5"/>
+                    <Ellipse x:Name="anelGiro"
+                             Width="34"
+                            Height="34"
+                             StrokeThickness="3.5"
+                             StrokeDashArray="2.2 2.4"
+                             StrokeStartLineCap="Round"
+                             StrokeEndLineCap="Round"
+                             RenderTransformOrigin="0.5,0.5">
+                        <Ellipse.Stroke>
+                            <SolidColorBrush Color="{DynamicResource CorAcentoCor}"/>
+                        </Ellipse.Stroke>
+                        <Ellipse.RenderTransform>
+                            <RotateTransform x:Name="rotacaoAnel"
+                                    Angle="0"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+                </Grid>
+
+                <TextBlock Text="Carregando..."
+                        FontSize="13"
+                           Foreground="{DynamicResource CorTextoMuted}"
+                           HorizontalAlignment="Center"
+                           Margin="0,16,0,0"/>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

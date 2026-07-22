@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ══════════ TEMA CLARO ══════════ -->
+
+    <!-- Cor de acento — mesmo azul usado na logo clara, para a marca ficar sempre
+         alinhada às cores do app neste tema. -->
+    <Color x:Key="CorAcentoCor">#0049BF</Color>
+    <SolidColorBrush x:Key="CorAcento" Color="{StaticResource CorAcentoCor}"/>
+
+    <SolidColorBrush x:Key="CorFundoJanela"      Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CorFundoPainel"       Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CorFundoCard"         Color="#f3f6fa"/>
+    <SolidColorBrush x:Key="CorFundoIcone"        Color="#e5e9f0"/>
+    <SolidColorBrush x:Key="CorFundoIconeHover"   Color="#d7dce6"/>
+    <SolidColorBrush x:Key="CorFundoItemExemplo"  Color="#eaeef4"/>
+
+    <SolidColorBrush x:Key="CorBorda"             Color="#cbd5e1"/>
+    <SolidColorBrush x:Key="CorBotaoCinzaHover"   Color="#b8c2cf"/>
+    <SolidColorBrush x:Key="CorBotaoCinzaPress"   Color="#94a3b8"/>
+
+    <SolidColorBrush x:Key="CorTextoPrimario"     Color="#0f172a"/>
+    <SolidColorBrush x:Key="CorTextoSecundario"   Color="#334155"/>
+    <SolidColorBrush x:Key="CorTextoMuted"        Color="#64748b"/>
+    <SolidColorBrush x:Key="CorTextoSuave"        Color="#1e293b"/>
+
+    <SolidColorBrush x:Key="CorIconeRosa"         Color="#e11d48"/>
+    <SolidColorBrush x:Key="CorIconeAzulClaro"    Color="#2563eb"/>
+
+    <!-- Ícone do botão de alternância de tema (sol = está no claro, toque para escurecer) -->
+    <system:String x:Key="IconeAlternarTema">☀</system:String>
+
+</ResourceDictionary>
