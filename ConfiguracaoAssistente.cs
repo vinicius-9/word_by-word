@@ -7,10 +7,10 @@ namespace WordByWord
     /// <summary>
     /// Guarda a configuração do Assistente (chave de API e modelo usado)
     /// em um arquivo JSON dentro da pasta de dados do usuário do Windows
-    /// (%AppData%\WordByWord\assistente_config.json).
+   
     ///
     /// Isso evita que a chave fique gravada dentro da pasta do projeto/instalação
-    /// e evita que ela seja versionada por engano no Git.
+  
     /// </summary>
     public class ConfiguracaoAssistente
     {
