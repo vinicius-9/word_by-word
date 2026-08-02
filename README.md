@@ -9,7 +9,6 @@ inglês e um assistente com IA pra tirar dúvidas na hora.
 
 💡 O aplicativo gera exemplos e textos base para auxiliar nos estudos, mas o usuário pode pesquisar, editar e complementar o conteúdo conforme sua necessidade.
 
-🚧 O projeto está sujeito a mudanças.
 ---
 
 ## ✨ Funcionalidades
